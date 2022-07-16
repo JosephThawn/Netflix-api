@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
-const movieRouter = require("./routes/movies");
+const movieRoute = require("./routes/movies");
+const listRoute = require("./routes/lists");
 
 dotenv.config();
 
@@ -16,15 +17,16 @@ mongoose
   })
   .then(() => console.log("DB Connection Successfull"))
   .catch((err) => {
-    console.error(err);
+    console.error(err, "DB is not connected...");
   });
 
 app.use(express.json());
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
-app.use("/api/users", movieRouter);
+app.use("/api/movies", movieRoute);
+app.use("/api/lists", listRoute);
 
-app.listen(8000, () => {
-  console.log("backend server is running");
+app.listen(8800, () => {
+  console.log("Backend server is running!");
 });
